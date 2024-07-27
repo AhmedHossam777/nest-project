@@ -4,20 +4,21 @@ import { AppService } from './app.service';
 import { BookingModule } from './booking/booking.module';
 import { PaymentModule } from './payment/payment.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Payment } from './payment/entities/payment.entity';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
     BookingModule,
     PaymentModule,
+    ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: 'ahmeddada111',
-      database: 'nest-project',
-      entities: [Payment],
+      host: process.env.DB_HOST,
+      port: process.env.DB_PORT as any,
+      username: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_DATABASE,
+      autoLoadEntities: true,
       synchronize: true,
     }),
   ],

@@ -14,7 +14,7 @@ type = 'JSON'
 raw = '''
 {
   "username": "hoss",
-  "currency": "dollar",
+  "currency": 1,
   "amount": 500
 }'''
 ```

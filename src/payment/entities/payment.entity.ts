@@ -1,4 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  AfterInsert,
+  AfterUpdate,
+  AfterRemove,
+} from 'typeorm';
 
 @Entity()
 export class Payment {
@@ -13,4 +20,19 @@ export class Payment {
 
   @Column()
   amount: number;
+
+  @AfterInsert()
+  logInsert() {
+    console.log(`new payment added with id: ${this.id}`);
+  }
+
+  @AfterUpdate()
+  logUpdate() {
+    console.log(`payment with ${this.id} id has been updated`);
+  }
+
+  @AfterRemove()
+  logDelete() {
+    console.log(`payment with ${this.id} id has been deleted`);
+  }
 }
