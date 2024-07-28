@@ -1,9 +1,9 @@
 ```toml
-name = 'create-user'
+name = 'signin'
 method = 'POST'
-url = 'http://localhost:3000/user'
-sortWeight = 2000000
-id = '86d50699-6f52-45d7-9d03-18003fb2f79f'
+url = 'http://localhost:3000/user/signin'
+sortWeight = 2500000
+id = '0b408dbb-46a4-4d02-a4dc-8ead3ba15e7f'
 
 [[queryParams]]
 key = 'user'
@@ -18,8 +18,7 @@ value = 'application/json'
 type = 'JSON'
 raw = '''
 {
-  "username": "ahmed hossam",
-  "email": "ahmed@email.com",
+  "email": "ahmed7@email.com",
   "password": "123456"
 }'''
 ```

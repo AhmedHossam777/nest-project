@@ -13,7 +13,7 @@ export class UserService {
   ) {}
   async create(createUserDto: CreateUserDto) {
     const user = this.userRepository.create(createUserDto);
-    return this.userRepository.save(user);
+    return await this.userRepository.save(user);
   }
 
   async findAll() {
@@ -22,6 +22,10 @@ export class UserService {
 
   async findOne(id: number) {
     return await this.userRepository.findOneBy({ id });
+  }
+
+  async find(email: string) {
+    return await this.userRepository.find({ where: { email } });
   }
 
   async update(id: number, updateUserDto: UpdateUserDto) {
