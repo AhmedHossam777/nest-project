@@ -18,7 +18,8 @@ value = 'application/json'
 type = 'JSON'
 raw = '''
 {
-  "username": "username_cC97",
-  "password": "password_uG63"
+  "username": "ahmed hossam",
+  "email": "ahmed@email.com",
+  "password": "123456"
 }'''
 ```
