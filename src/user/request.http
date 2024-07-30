@@ -27,3 +27,29 @@ POST  http://localhost:3000/user/signout
 Content-Type: application/json
 
 {}
+
+### Get user by email
+GET http://localhost:3000/user?email=ahmed6@email.com
+Content-Type: application/json
+
+{}
+
+### Get user by id
+GET http://localhost:3000/user/3
+Content-Type: application/json
+
+{}
+
+### Update user by id
+PATCH  http://localhost:3000/user/3
+Content-Type: application/json
+
+{
+    "email": "dada@email.com"
+}
+
+### Delete user by id
+DELETE http://localhost:3000/user/3
+Content-Type: application/json
+
+{}

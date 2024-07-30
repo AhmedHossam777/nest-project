@@ -68,28 +68,23 @@ export class UserController {
     session.userId = null;
   }
 
-  @Get()
-  findAll() {
-    return this.userService.findAll();
+  @Get('')
+  find(@Query('email') email: string) {
+    return this.userService.find(email);
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.userService.findOne(+id);
-  }
-
-  @Get('')
-  find(@Query() email: string) {
-    return this.userService.find(email);
+    return this.userService.findOne(parseInt(id));
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.userService.update(+id, updateUserDto);
+    return this.userService.update(parseInt(id), updateUserDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.userService.remove(+id);
+    return this.userService.remove(parseInt(id));
   }
 }
