@@ -8,6 +8,8 @@ import {
   Delete,
   Query,
   Session,
+  BadRequestException,
+  NotFoundException,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -43,6 +45,27 @@ export class UserController {
     session.userId = user.id;
 
     return user;
+  }
+
+  @Get('/whoAmI')
+  async whoAmI(@Session() session: any) {
+    if (!session || !session.userId) {
+      throw new BadRequestException(
+        'Session is not initialized or user is not logged in',
+      );
+    }
+    const user = await this.userService.findOne(session.userId);
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+
+    return user;
+  }
+
+  @Post('/signout')
+  async signout(@Session() session: any) {
+    console.log(session.userId);
+    session.userId = null;
   }
 
   @Get()
