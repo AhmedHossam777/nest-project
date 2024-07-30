@@ -8,15 +8,18 @@ import {
   Delete,
   Query,
   Session,
-  BadRequestException,
-  NotFoundException,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { AuthService } from './auth.service';
+import { CurrentUser } from './decorators/current-user.decorator';
+import { UserDto } from './dto/user.dto';
+import { Serialize } from '../interceptors/serialize.interceptor';
+import { User } from './entities/user.entity';
 
 @Controller('user')
+@Serialize(UserDto)
 export class UserController {
   constructor(
     private readonly userService: UserService,
@@ -48,17 +51,7 @@ export class UserController {
   }
 
   @Get('/whoAmI')
-  async whoAmI(@Session() session: any) {
-    if (!session || !session.userId) {
-      throw new BadRequestException(
-        'Session is not initialized or user is not logged in',
-      );
-    }
-    const user = await this.userService.findOne(session.userId);
-    if (!user) {
-      throw new NotFoundException('User not found');
-    }
-
+  async whoAmI(@CurrentUser() user: User) {
     return user;
   }
 
